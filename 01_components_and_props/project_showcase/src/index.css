@@ -201,7 +201,7 @@ select:focus {
   position: relative;
 }
 
-.card .image img {
+img {
   width: 100%;
   height: 175px;
   object-fit: cover;
