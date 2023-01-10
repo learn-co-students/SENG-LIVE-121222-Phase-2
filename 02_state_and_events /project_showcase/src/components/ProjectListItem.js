@@ -6,9 +6,12 @@ const ProjectListItem = ({ id, about, image, link, name, phase }) => {
   const [ clapCount, setClapCount ] = useState(0);
   
   // Set Up Helper Function to Handle Click Event
-  const handleClaps = () => {
+  const handleClaps = (e) => {
     
+    // console.log(e);
+
     // Pre-Built Setter Function From useState Hook
+    // setClapCount(clapCount => clapCount + 1);
     setClapCount(prevCount => prevCount + 1);
   }
 
