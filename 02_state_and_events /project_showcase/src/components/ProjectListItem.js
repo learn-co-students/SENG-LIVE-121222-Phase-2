@@ -1,9 +1,22 @@
+import { useState } from 'react';
+
 const ProjectListItem = ({ id, about, image, link, name, phase }) => {
+  
+  // Set Up State / State Setter Function to Manage clapCount
+  const [ clapCount, setClapCount ] = useState(0);
+  
+  // Set Up Helper Function to Handle Click Event
+  const handleClaps = () => {
+    
+    // Pre-Built Setter Function From useState Hook
+    setClapCount(prevCount => prevCount + 1);
+  }
+
   return (
     <li className="card">
       <figure className="image">
         <img src={image} alt={name} />
-        <button className="claps">👏{0}</button>
+        <button onClick={handleClaps} className="claps">👏{clapCount}</button>
       </figure>
 
       <section className="details">

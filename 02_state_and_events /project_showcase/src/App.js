@@ -14,11 +14,19 @@ const App = () => {
   // Inverse Data Flow
 
     // We Have Lifted State (isDarkMode) to App
-    const [isDarkMode, setDarkMode] = useState(true);
+    const [isDarkMode, setIsDarkMode] = useState(true);
 
     // We have brought over our Helper Function as well 
     const handleClick = () => {
-      setDarkMode(!isDarkMode);
+      
+      // Not Directly Mutating State, using Setter Function 
+      // setDarkMode(!isDarkMode);
+      // setDarkMode(() => !isDarkMode);
+      
+      // Preferred Approach
+      setIsDarkMode(prevValue => !prevValue);
+      
+      // return !isDarkMode;
     }
 
   return (
