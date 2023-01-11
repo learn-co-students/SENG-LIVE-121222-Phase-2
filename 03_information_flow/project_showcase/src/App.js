@@ -4,7 +4,15 @@ import Header from "./components/Header";
 import ProjectForm from "./components/ProjectForm";
 import ProjectList from "./components/ProjectList";
 
+// Previous Approach
+// import { projects } from "./projects";
+
 const App = () => {
+  
+  // We Want to Load Up Our Data into "projects" State
+    // Why? By storing our "projects" data in State,
+    // We Can Now Work with Our Data More Flexibly
+    // Via Inverse Data Flow
   const [projects, setProjects] = useState([]);
 
   // # Deliverable 1: Configure a <button> in our App 
@@ -14,16 +22,28 @@ const App = () => {
   // - Add an onClick event listener to the "Load Projects" 
   // button
 
-  // - When the button is clicked, make a fetch 
-  // request to "http://localhost:4000/projects"
-  // and set the `projects` state to the value 
-  // returned by the response
+  const fetchProjects = () => {
+
+    // specify our request URL, no second argument
+    // no need for config object
+    fetch("http://localhost:4000/projects")
+      
+      // convert JSON response into JS
+      .then(res => res.json())
+
+      // take data (Array), set as new value for projects
+      // state
+      .then(projects => setProjects(projects))
+      
+      // add some error handling
+      .catch(error => console.error(error));
+  }
 
   return (
     <div className="App">
       <Header />
-      <ProjectForm />
-      <button>Load Projects</button>
+      <ProjectForm/>
+      <button onClick={fetchProjects}>Load Projects</button>
       <ProjectList projects={projects} />
     </div>
   );
