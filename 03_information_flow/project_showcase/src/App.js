@@ -18,6 +18,9 @@ const App = () => {
   // Lifting isDarkMode to App
   const [isDarkMode, setIsDarkMode] = useState(true);
 
+  // Lifting searchQuery to App
+  const [searchQuery, setSearchQuery] = useState("");
+
   // Moving Up Our CB Function to Update isDarkMode State
   const onToggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
@@ -48,15 +51,29 @@ const App = () => {
   // Set appTheme Based Upon Value of isDarkMode Value
   const appTheme = isDarkMode ? "App" : "App light";
 
+  // Move Filter Logic Up to Root App Component
+  const searchResults = projects.filter((project) => {
+    return project.name.toLowerCase().includes(searchQuery.toLowerCase());
+  });
+
   return (
     <div className={appTheme}>
       <Header 
         isDarkMode={isDarkMode}
         onToggleDarkMode={onToggleDarkMode}
+        // ...any
+        // ...additional
+        // ...props
       />
       <ProjectForm/>
       <button onClick={fetchProjects}>Load Projects</button>
-      <ProjectList projects={projects} />
+      <ProjectList 
+        setSearchQuery={setSearchQuery}
+        searchResults={searchResults}
+        // ...any
+        // ...additional
+        // ...props
+      />
     </div>
   );
 };

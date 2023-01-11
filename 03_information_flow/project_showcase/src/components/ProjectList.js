@@ -1,12 +1,6 @@
 import ProjectListItem from "./ProjectListItem";
-import { useState } from "react";
 
-const ProjectList = ({ projects }) => {
-  const [searchQuery, setSearchQuery] = useState("");
-
-  const searchResults = projects.filter((project) => {
-    return project.name.toLowerCase().includes(searchQuery.toLowerCase());
-  });
+const ProjectList = ({ setSearchQuery, searchResults }) => {
 
   const projectListItems = searchResults.map((project) => (
     
@@ -15,9 +9,10 @@ const ProjectList = ({ projects }) => {
     <ProjectListItem key={project.id} {...project} />
   ));
 
+  // Inverse Data Flow
   const handleOnChange = (e) => setSearchQuery(e.target.value);
 
-  // Deliverable 3: Refactor the filter component out of 
+  // Deliverable 3: Refactor the filter logic out of 
   // `ProjectList` and implement inverse data flow
 
     // - Refactor the `searchQuery` state and the filter 
