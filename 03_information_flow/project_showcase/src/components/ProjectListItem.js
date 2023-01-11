@@ -2,6 +2,9 @@ import { useState } from "react";
 
 const ProjectListItem = ({ id, about, image, link, name, phase }) => {
 
+  // If we passed each "project" object down as a prop...
+  // const { id, about, image, link, name, phase } = project;
+
   const [clapCount, setClapCount] = useState(0);
 
   const handleClap = () => setClapCount(prevCount => prevCount + 1);

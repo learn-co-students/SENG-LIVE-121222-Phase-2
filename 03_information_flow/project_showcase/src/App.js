@@ -8,12 +8,18 @@ import ProjectList from "./components/ProjectList";
 // import { projects } from "./projects";
 
 const App = () => {
-  
+
   // We Want to Load Up Our Data into "projects" State
     // Why? By storing our "projects" data in State,
     // We Can Now Work with Our Data More Flexibly
     // Via Inverse Data Flow
-  const [projects, setProjects] = useState([]);
+  const [projects, setProjects] = useState([]);  
+  
+  // Lifting isDarkMode to App
+  const [isDarkMode, setIsDarkMode] = useState(true);
+
+  // Moving Up Our CB Function to Update isDarkMode State
+  const onToggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
   // # Deliverable 1: Configure a <button> in our App 
   // that will use json-server to fetch projects 
@@ -39,9 +45,15 @@ const App = () => {
       .catch(error => console.error(error));
   }
 
+  // Set appTheme Based Upon Value of isDarkMode Value
+  const appTheme = isDarkMode ? "App" : "App light";
+
   return (
-    <div className="App">
-      <Header />
+    <div className={appTheme}>
+      <Header 
+        isDarkMode={isDarkMode}
+        onToggleDarkMode={onToggleDarkMode}
+      />
       <ProjectForm/>
       <button onClick={fetchProjects}>Load Projects</button>
       <ProjectList projects={projects} />
