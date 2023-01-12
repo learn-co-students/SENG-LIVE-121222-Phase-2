@@ -12,7 +12,7 @@
 
 import { useState } from 'react';
 
-const ProjectForm = ({ onAddProject }) => {
+const ProjectForm = ({ onAddProject, onError, projects }) => {
   
   // First Approach (Not Recommended)
 
@@ -63,7 +63,8 @@ const ProjectForm = ({ onAddProject }) => {
       e.preventDefault();
 
       // Optimistic Rendering
-      // onAddProject(formData);
+      // Update "projects" State with Newest Project
+      onAddProject(formData);
 
       const configObj = {
         method: "POST",
@@ -81,14 +82,26 @@ const ProjectForm = ({ onAddProject }) => {
           
           // Merge Newest Project Into "projects" State
           // Pessimistic Rendering
-          onAddProject(newProject);
+          // onAddProject(newProject);
 
           // Reset Form Values via State Change (Single Source of Truth)
           setFormData(initialValues);
         })
         .catch(() => {
           // Undo Optimistic Rendering
-          // Add Additional Code to Undo State Change
+
+          // Filter Through Existing List of Projects in "projects" State
+          // Return New List of Projects With Newest (formData) Project Filtered Out
+          const revertedProjectList = projects.filter(project => {
+            
+            // Return All Projects Whose Names Do NOT Match formData.name
+            return project.name !== formData.name;
+          });
+
+          // Invoke onError Function from App Component, Updating
+          // "projects" State With revertedProjectList Array / Undoing
+          // Optimistic Change
+          onError(revertedProjectList);
         });
     }
 

@@ -48,11 +48,16 @@ const App = () => {
     setProjects([...projects, newProject]);
   }  
 
+  // Update "projects" State With Filtered List
+  const onError = filteredList => { setProjects(filteredList) };
+
   return (
     <div className={isDarkMode ? "App" : "App light"}>
       <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
       <ProjectForm 
         onAddProject={onAddProject}
+        onError={onError}
+        projects={projects}
       />
       <button onClick={handleClick}>Load Projects</button>
       <ProjectList projects={projects} />
