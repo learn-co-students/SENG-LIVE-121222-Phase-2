@@ -15,6 +15,16 @@ import ProjectList from "./components/ProjectList";
 
 //     - Set the `projects` state to the new array value
 
+// We will enable full CRUD for each Project:
+
+  // CREATE => TBD
+
+  // READ => Pulling All Projects from "db.json"
+
+  // UPDATE => TBD
+
+  // DELETE => TBD
+
 const App = () => {
   const [projects, setProjects] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(true);
@@ -27,10 +37,23 @@ const App = () => {
 
   const onToggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
+  // Helper Function for Adding Each New Project to "projects"
+
+  const onAddProject = (newProject) => {
+    
+    // BAD => Mutating Original Array
+    // setProjects(projects.push(newProject))
+
+    // GOOD => Creating an Entirely New Array
+    setProjects([...projects, newProject]);
+  }  
+
   return (
     <div className={isDarkMode ? "App" : "App light"}>
       <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
-      <ProjectForm />
+      <ProjectForm 
+        onAddProject={onAddProject}
+      />
       <button onClick={handleClick}>Load Projects</button>
       <ProjectList projects={projects} />
     </div>

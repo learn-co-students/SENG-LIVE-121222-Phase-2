@@ -12,7 +12,7 @@
 
 import { useState } from 'react';
 
-const ProjectForm = () => {
+const ProjectForm = ({ onAddProject }) => {
   
   // First Approach (Not Recommended)
 
@@ -29,15 +29,18 @@ const ProjectForm = () => {
 
   // Second Approach (Recommended)
 
-    const [formData, setFormData] = useState({
+    const initialValues = {
       name: "",
       about: "",
       phase: "",
       link: "",
       image: ""
-    });
+    };
+
+    const [formData, setFormData] = useState(initialValues);
 
     // Nice One Seb!
+    // Object Destructuring Assignment
     const { name, about, phase, link, image } = formData;
 
     const handleOnChange = (e) => {
@@ -50,12 +53,25 @@ const ProjectForm = () => {
       // console.log(name);
       // console.log(value);
 
-      setFormData({...formData, [name]: value});
-    }  
-  
+      setFormData((formData) => ({ ...formData, [name]: value }));
+    } 
+    
+    // Handle Submit Event / Add Newest Project to "projects"
+    const handleSubmit = (e) => {
+      
+      // Prevent Default Page Refresh
+      e.preventDefault();
+
+      // Merge Newest Project Into "projects" State
+      onAddProject(formData);
+
+      // Reset Form Values via State Change (Single Source of Truth)
+      setFormData(initialValues);
+    }
+
   return (
     <section>
-      <form className="form" autoComplete="off">
+      <form className="form" autoComplete="off" onSubmit={handleSubmit}>
         <h3>Add New Project</h3>
 
         <label htmlFor="name">Name</label>
