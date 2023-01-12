@@ -17,7 +17,7 @@ import ProjectList from "./components/ProjectList";
 
 // We will enable full CRUD for each Project:
 
-  // CREATE => TBD
+  // CREATE => Persist Each New Project to "db.json"
 
   // READ => Pulling All Projects from "db.json"
 

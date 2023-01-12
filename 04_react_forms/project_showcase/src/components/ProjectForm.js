@@ -62,11 +62,34 @@ const ProjectForm = ({ onAddProject }) => {
       // Prevent Default Page Refresh
       e.preventDefault();
 
-      // Merge Newest Project Into "projects" State
-      onAddProject(formData);
+      // Optimistic Rendering
+      // onAddProject(formData);
 
-      // Reset Form Values via State Change (Single Source of Truth)
-      setFormData(initialValues);
+      const configObj = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accepts": "application/json"
+        },
+        body: JSON.stringify(formData)
+      }
+
+      // Add POST Fetch Request
+      fetch("http://localhost:4000/projects", configObj)
+        .then(res => res.json())
+        .then(newProject => {
+          
+          // Merge Newest Project Into "projects" State
+          // Pessimistic Rendering
+          onAddProject(newProject);
+
+          // Reset Form Values via State Change (Single Source of Truth)
+          setFormData(initialValues);
+        })
+        .catch(() => {
+          // Undo Optimistic Rendering
+          // Add Additional Code to Undo State Change
+        });
     }
 
   return (
