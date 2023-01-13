@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import ProjectForm from "./components/ProjectForm";
 import ProjectList from "./components/ProjectList";
+import Timer from "./components/Timer";
 
 // Deliverable 1: Implement useEffect in App component 
 // to load projects
@@ -27,10 +28,15 @@ import ProjectList from "./components/ProjectList";
 const App = () => {
   const [projects, setProjects] = useState([]);
   const [isDarkMode, setIsDarkMode] = useState(true);
+  const [isTimerVisible, setIsTimerVisible] = useState(false);
 
   const onAddProject = newProject => {
     const newProjectCollection = [...projects, newProject];
     setProjects(newProjectCollection);
+  }
+
+  const toggleTimer = () => {
+    setIsTimerVisible(!isTimerVisible);
   }
 
   // useEffect(EFFECT(CB), DEPENDENCY ARRAY)
@@ -43,16 +49,20 @@ const App = () => {
       // [some, other, variables] => Fire Off "Side Effect"
         // Each Time "some", "other", "variables" Are Changed
 
+  // 1. Invoke App Component Function
+  // 2. Invoke useEffect Hook
+  // 3. Invoke App Component Function Again
+
   useEffect(() => {
     
-    console.log("Side Effect Fired Off!");
+    // console.log("Side Effect Fired Off!");
     
     fetch("http://localhost:4000/projects")
       .then((res) => res.json())
       .then((projects) => setProjects(projects));
   }, []);
 
-  console.log("Component Rendered!");
+  // console.log("Component Rendered!");
   
   // BAD!
     // });
@@ -70,15 +80,20 @@ const App = () => {
   // With POST Request
   const onError = filteredList => { setProjects(filteredList) };
 
+  const toggleTimerText = isTimerVisible ? "Hide Timer" : "Show Timer";
+
+  const timerComponent = isTimerVisible ? <Timer /> : null
+
   return (
     <div className={isDarkMode ? "App" : "App light"}>
+      <button onClick={toggleTimer}>{toggleTimerText}</button>
+      {timerComponent}
       <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
       <ProjectForm 
         onAddProject={onAddProject} 
         onError={onError}
         projects={projects}
       />
-      {/* <button onClick={handleClick}>Load Projects</button> */}
       <ProjectList projects={projects} />
     </div>
   );
