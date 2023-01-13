@@ -26,6 +26,16 @@ const Timer = () => {
             console.log("Page Clicked!");
         }
 
+        const clearBehaviors = () => {
+            console.log("Clean Up Function Fired Off!");
+            
+            // Clean Up setInterval
+            clearInterval(intervalId);
+
+            // Clean Up Click Event Listener
+            document.removeEventListener("click", consoleLog);
+        }
+
         // Adding Event Listeners (Another Behavior to Be Cleaned Up)
         document.addEventListener("click", consoleLog);
 
@@ -42,13 +52,9 @@ const Timer = () => {
 
         // Clean Up Behavior
         return () => {
-            console.log("Clean Up Function Fired Off!");
-            
-            // Clean Up setInterval
-            clearInterval(intervalId);
+            clearBehaviors();
 
-            // Clean Up Click Event Listener
-            document.removeEventListener("click", consoleLog);
+            // Add Any Additional Behaviors
         }
     }, []);
 
