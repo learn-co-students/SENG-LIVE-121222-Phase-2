@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import ProjectForm from "./components/ProjectForm";
 import ProjectList from "./components/ProjectList";
@@ -6,22 +6,22 @@ import ProjectList from "./components/ProjectList";
 // Deliverable 1: Implement useEffect in App component 
 // to load projects
 
-  // Import the `useEffect` hook from the React library
+  // DONE - Import the `useEffect` hook from the React library
 
-  // Invoke `useEffect` and make a `GET` request using 
+  // DONE - Invoke `useEffect` and make a `GET` request using 
   // the `fetch` method
 
-  // Update `projects` state upon successful response 
+  // DONE - Update `projects` state upon successful response 
   // from the server
 
 // Deliverable 2: Demonstrate the order of operations 
 // between rendering a component and running the side 
 // effect
 
-  // Place a console.log() inside the `App` component as 
+  // DONE - Place a console.log() inside the `App` component as 
   // well as the `useEffect` method
 
-  // Open up the devtools to observe when each phase of 
+  // DONE - Open up the devtools to observe when each phase of 
   // the component will occur 
 
 const App = () => {
@@ -33,11 +33,36 @@ const App = () => {
     setProjects(newProjectCollection);
   }
 
-  const handleClick = () => {
+  // useEffect(EFFECT(CB), DEPENDENCY ARRAY)
+
+    // Dependency Array Options
+
+      // Omit Entirely => No Constraint, Fire Off "Side Effect"
+        // Each Time Component Re-Renders
+      // [] => Fire Off "Side Effect" Once and Only Once (Initial Render)
+      // [some, other, variables] => Fire Off "Side Effect"
+        // Each Time "some", "other", "variables" Are Changed
+
+  useEffect(() => {
+    
+    console.log("Side Effect Fired Off!");
+    
     fetch("http://localhost:4000/projects")
       .then((res) => res.json())
       .then((projects) => setProjects(projects));
-  };
+  }, []);
+
+  console.log("Component Rendered!");
+  
+  // BAD!
+    // });
+    // }, [projects]);
+
+  // const handleClick = () => {
+    // fetch("http://localhost:4000/projects")
+    //   .then((res) => res.json())
+    //   .then((projects) => setProjects(projects));
+  // };
 
   const onToggleDarkMode = () => setIsDarkMode(!isDarkMode);
 
@@ -53,7 +78,7 @@ const App = () => {
         onError={onError}
         projects={projects}
       />
-      <button onClick={handleClick}>Load Projects</button>
+      {/* <button onClick={handleClick}>Load Projects</button> */}
       <ProjectList projects={projects} />
     </div>
   );
