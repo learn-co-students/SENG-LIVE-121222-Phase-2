@@ -43,7 +43,7 @@ const ProjectForm = ({ onAddProject, onError, projects }) => {
         
         // Merge Newest Project Into "projects" State
         // Pessimistic Rendering
-        onAddProject(newProject);
+        // onAddProject(newProject);
 
         // Clear Out Form Values
         setFormData(initialFormValues);
@@ -51,6 +51,9 @@ const ProjectForm = ({ onAddProject, onError, projects }) => {
       .catch(() => {
           // Undo Optimistic Rendering
           // Add Additional Code to Undo State Change (projects)
+
+          // Nice One John!
+          alert("Something Went Wrong!");
 
           // Filter Through Existing List of Projects in "projects" State
           // Return New List of Projects With Newest (formData) Project Filtered Out

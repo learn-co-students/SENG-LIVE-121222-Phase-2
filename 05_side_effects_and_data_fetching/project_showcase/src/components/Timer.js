@@ -22,19 +22,21 @@ const Timer = () => {
             // Because We Only Need the Incrementation
             // Behavior To Fire Off Once
 
-        const consoleLog = () => {
-            console.log("Page Clicked!");
-        }
+        // Function Declarations
+        
+            const consoleLog = () => {
+                console.log("Page Clicked!");
+            }
 
-        const clearBehaviors = () => {
-            console.log("Clean Up Function Fired Off!");
-            
-            // Clean Up setInterval
-            clearInterval(intervalId);
+            const clearBehaviors = () => {
+                console.log("Clean Up Function Fired Off!");
+                
+                // Clean Up setInterval
+                clearInterval(intervalId);
 
-            // Clean Up Click Event Listener
-            document.removeEventListener("click", consoleLog);
-        }
+                // Clean Up Click Event Listener
+                document.removeEventListener("click", consoleLog);
+            }
 
         // Adding Event Listeners (Another Behavior to Be Cleaned Up)
         document.addEventListener("click", consoleLog);
