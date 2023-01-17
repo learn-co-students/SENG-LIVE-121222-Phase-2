@@ -61,6 +61,10 @@ const ProjectListItem = ({ project, enterProjectEditModeFor, onDeleteProject }) 
 
   // Inverse Data Flow
     // Updates "projectId" State in Root App
+    
+    // Helper Function => handleEditClick
+    // enterProjectEditModeFor => CB Function Containing State Setter Function
+      // Invocation
   const handleEditClick = () => {
     enterProjectEditModeFor(id);
   };
