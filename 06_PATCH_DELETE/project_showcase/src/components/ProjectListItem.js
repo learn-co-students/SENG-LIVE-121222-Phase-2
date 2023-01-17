@@ -1,13 +1,13 @@
 // Deliverable 2: Click the delete button and make a 
 // DELETE request
 
-// - Attach an `onClick` event listener to the delete 
+// DONE - Attach an `onClick` event listener to the delete 
 // button
 
-// - Add a `DELETE` fetch request to the event handler 
+// DONE - Add a `DELETE` fetch request to the event handler 
 // for the delete button
 
-// - Update the `projects` state in the parent component
+// DONE - Update the `projects` state in the parent component
 // `App` using the `.filter` function
 
   //  The goal is to return a new array with the deleted project excluded
@@ -23,7 +23,8 @@
 import { useState } from "react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 
-const ProjectListItem = ({ project, enterProjectEditModeFor }) => {
+const ProjectListItem = ({ project, enterProjectEditModeFor, onDeleteProject }) => {
+  
   const { id, image, about, name, link, phase } = project;
 
   const [clapCount, setClapCount] = useState(0);
@@ -36,7 +37,32 @@ const ProjectListItem = ({ project, enterProjectEditModeFor }) => {
     enterProjectEditModeFor(id);
   };
 
-  const handleDeleteClick = () => {};
+  const handleDeleteClick = () => {
+    
+    const configObj = {
+      method: "DELETE"
+    };
+
+    fetch(`http://localhost:4000/projects/${id}`, configObj)
+      .then((resp) => resp.json())
+      .then(() => {
+        
+        // TWO GOALS => Update Data (Back End) + Update State Asynchronously (Front End)
+        
+        // Update the `projects` state in the parent 
+        // component `App` using the `.filter` function
+
+        // The goal is to return a new array with the 
+        // original project excluded and the newly updated 
+        // project included.
+
+        onDeleteProject(project);
+
+        // Reverts "projectId" to "null"
+          // App Component Re-Renders With <ProjectForm />
+        // completeEditing();
+      });
+  };
 
   return (
     <li className="card">

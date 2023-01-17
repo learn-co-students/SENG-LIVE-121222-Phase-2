@@ -45,7 +45,19 @@ const App = () => {
       }
     });
 
-    // Modify the "projects" State in Some Way
+    // Modify the "projects" State With Updated List
+    setProjects(updatedProjectsList);
+  }
+
+  const onDeleteProject = (deletedProject) => {
+    const updatedProjectsList = projects.filter(originalProject => {
+      
+      // Return all originalProjects Whose Ids Do Not Match
+      // DeletedProject.id
+      return originalProject.id !== deletedProject.id; 
+    }); 
+
+    // Modify the "projects" State With Updated List
     setProjects(updatedProjectsList);
   }
 
@@ -87,6 +99,7 @@ const App = () => {
       <ProjectList
         projects={projects}
         enterProjectEditModeFor={enterProjectEditModeFor}
+        onDeleteProject={onDeleteProject}
       />
     </div>
   );
