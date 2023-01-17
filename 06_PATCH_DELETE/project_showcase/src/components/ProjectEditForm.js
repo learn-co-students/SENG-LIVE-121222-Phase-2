@@ -84,7 +84,10 @@ const ProjectEditForm = ({ projectId, completeEditing, onUpdateProject }) => {
         // Reverts "projectId" to "null"
           // App Component Re-Renders With <ProjectForm />
         completeEditing();
-      });
+      })
+      // .catch(() => {
+
+      // });
   }
 
   return (

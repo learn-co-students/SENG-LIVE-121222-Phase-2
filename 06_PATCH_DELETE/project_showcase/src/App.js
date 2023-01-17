@@ -110,6 +110,8 @@ const App = () => {
         projects={projects}
         enterProjectEditModeFor={enterProjectEditModeFor}
         onDeleteProject={onDeleteProject}
+        completeEditing={completeEditing}
+        projectId={projectId}
       />
     </div>
   );

@@ -23,11 +23,9 @@
 import { useState } from "react";
 import { FaPencilAlt, FaTrash } from "react-icons/fa";
 
-const ProjectListItem = ({ project, enterProjectEditModeFor, onDeleteProject }) => {
+const ProjectListItem = ({ project, enterProjectEditModeFor, onDeleteProject, completeEditing, projectId }) => {
   
   const { id, image, about, name, link, phase, claps } = project;
-
-  console.log(claps);
 
   // If project Has Any Claps, Load That Number Up As Our Initial Value
   // If Not, Load Up "0" As Our Initial Value
@@ -89,6 +87,14 @@ const ProjectListItem = ({ project, enterProjectEditModeFor, onDeleteProject }) 
         // project included.
 
         onDeleteProject(project);
+
+        // Only If Project Being Deleted Is the Same As Project Currently
+        // Being Edited, Re-Render ProjectForm Instead of ProjectEditForm
+        if (id === projectId) {
+        
+          // Return projectId Value to "null"
+          completeEditing();
+        }
 
         // Reverts "projectId" to "null"
           // App Component Re-Renders With <ProjectForm />
