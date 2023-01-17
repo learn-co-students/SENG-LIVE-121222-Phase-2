@@ -2,11 +2,12 @@
   "projects": [
     {
       "id": 1,
-      "name": "TESTING HELLO 123 XYZ",
+      "name": "Great Outdoors Guide",
       "about": "Plan your next adventure to in the U.S. National Parks!",
       "phase": 4,
       "link": "https://great-outdoors-guide.netlify.app",
-      "image": "https://i.imgur.com/8GnP2Uw.png"
+      "image": "https://i.imgur.com/8GnP2Uw.png",
+      "claps": 10
     },
     {
       "id": 2,
@@ -14,7 +15,8 @@
       "about": "The app takes you (the Casting Director) through a series of questions to determine the Models you need for your next Project.",
       "phase": 4,
       "link": "https://bookher.netlify.app/new_project",
-      "image": "https://i.imgur.com/INs84Uk.png"
+      "image": "https://i.imgur.com/INs84Uk.png",
+      "claps": 7
     },
     {
       "id": 3,
@@ -22,7 +24,8 @@
       "about": "Web-based CSS, JS and HTML Editor",
       "phase": 4,
       "link": "https://code-bucket.netlify.app",
-      "image": "https://i.imgur.com/Hz84TA2.png"
+      "image": "https://i.imgur.com/Hz84TA2.png",
+      "claps": 3
     },
     {
       "id": 11,

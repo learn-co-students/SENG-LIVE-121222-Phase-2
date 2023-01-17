@@ -57,7 +57,6 @@ const ProjectEditForm = ({ projectId, completeEditing, onUpdateProject }) => {
   function handleSubmit(e) {
     e.preventDefault();
     
-    
     const configObj = {
       method: "PATCH",
       headers: {

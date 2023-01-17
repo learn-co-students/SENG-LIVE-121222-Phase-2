@@ -1,3 +1,13 @@
+// Full CRUD Capabilities
+
+  // CREATE (POST) => Create New Projects
+  
+  // READ (GET) => Pull All Projects / Individual Projects
+
+  // UPDATE (PATCH) => Update Each Project (Form Values / Claps)
+
+  // DESTROY (DELETE) => Remove Individual Projects
+
 import { useEffect, useState } from "react";
 
 import Header from "./components/Header";

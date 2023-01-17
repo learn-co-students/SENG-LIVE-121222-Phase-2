@@ -25,11 +25,39 @@ import { FaPencilAlt, FaTrash } from "react-icons/fa";
 
 const ProjectListItem = ({ project, enterProjectEditModeFor, onDeleteProject }) => {
   
-  const { id, image, about, name, link, phase } = project;
+  const { id, image, about, name, link, phase, claps } = project;
 
-  const [clapCount, setClapCount] = useState(0);
+  console.log(claps);
 
-  const handleClap = () => setClapCount(prevCount => prevCount + 1);
+  // If project Has Any Claps, Load That Number Up As Our Initial Value
+  // If Not, Load Up "0" As Our Initial Value
+
+    // If "claps" is Not Falsey, Use That As Initial Value
+    // If "claps" is Falsey (Undefined), Use "0" As Initial Value
+  const [clapCount, setClapCount] = useState(claps || 0);
+
+  // - Send a `PATCH` request when the `clapsCount` is updated through a click event
+  const handleClap = () => { 
+    
+    const configObj = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify({ claps: clapCount + 1 })
+    };
+
+    fetch(`http://localhost:4000/projects/${id}`, configObj)
+      .then((resp) => resp.json())
+      .then(() => {
+        
+        // TWO GOALS => Update Data (Back End) + Update State (Front End)
+        
+        // State Change
+        setClapCount(prevCount => prevCount + 1);
+      });
+  };
 
   // Inverse Data Flow
     // Updates "projectId" State in Root App
