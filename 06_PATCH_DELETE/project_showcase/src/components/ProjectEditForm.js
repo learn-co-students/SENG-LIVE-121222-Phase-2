@@ -1,28 +1,28 @@
 // Deliverable 1: Submit the edit project form and 
 // make a PATCH request
 
-  // Update the `useEffect` inside the `ProjectEditForm` 
+  // DONE - Update the `useEffect` inside the `ProjectEditForm` 
   // component so that the side effect will run upon 
   // `projectId` updates
 
-  // Inside of the `ProjectEditForm` component, update 
+  // DONE - Inside of the `ProjectEditForm` component, update 
   // `handleSubmit` to include a `PATCH` request
 
-  // Include the updated state values in the `PATCH` 
+  // DONE - Include the updated state values (formData) in the `PATCH` 
   // request
 
-  // Update the `projects` state in the parent 
+  // DONE - Update the `projects` state in the parent 
   // component `App` using the `.map` function
 
-    // The goal is to return a new array with the 
+    // DONE - The goal is to return a new array with the 
     // original project excluded and the newly updated 
     // project included.
 
-  // Reset the edit form after submission is complete
+  // DONE - Reset the edit form after submission is complete
 
 import { useState, useEffect } from "react";
 
-const ProjectEditForm = ({ projectId, completeEditing }) => {
+const ProjectEditForm = ({ projectId, completeEditing, onUpdateProject }) => {
   const initialState = {
     name: "",
     about: "",
@@ -35,11 +35,19 @@ const ProjectEditForm = ({ projectId, completeEditing }) => {
 
   const { name, about, phase, link, image } = formData;
 
+  // Every time we update "projectId", we want to fire off
+  // a "fetch" request to pull THAT project's ID
   useEffect(() => {
     fetch(`http://localhost:4000/projects/${projectId}`)
       .then((res) => res.json())
       .then((project) => setFormData(project));
-  }, []);
+  }, [projectId]);
+
+    // Dependency Arrays
+      // Omit => Fire Off Effect Upon Initial Render / Each Subsequent Re-Render
+      // [] => Fire Off Effect Upon Initial Render And No More Afterwards
+      // [projectId] => Fire Off Effect Upon Initial Render / Each Time "projectId"
+        // changes in some way.
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -48,8 +56,36 @@ const ProjectEditForm = ({ projectId, completeEditing }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    // Add code here
-    completeEditing();
+    
+    
+    const configObj = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+      body: JSON.stringify(formData),
+    };
+
+    fetch(`http://localhost:4000/projects/${projectId}`, configObj)
+      .then((resp) => resp.json())
+      .then((updatedProject) => {
+        
+        // TWO GOALS => Update Data (Back End) + Update State (Front End)
+        
+        // Update the `projects` state in the parent 
+        // component `App` using the `.map` function
+
+        // The goal is to return a new array with the 
+        // original project excluded and the newly updated 
+        // project included.
+
+        onUpdateProject(updatedProject);
+
+        // Reverts "projectId" to "null"
+          // App Component Re-Renders With <ProjectForm />
+        completeEditing();
+      });
   }
 
   return (

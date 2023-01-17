@@ -2,7 +2,7 @@
   "projects": [
     {
       "id": 1,
-      "name": "Great Outdoors Guide",
+      "name": "TESTING HELLO 123 XYZ",
       "about": "Plan your next adventure to in the U.S. National Parks!",
       "phase": 4,
       "link": "https://great-outdoors-guide.netlify.app",
@@ -10,7 +10,7 @@
     },
     {
       "id": 2,
-      "name": "Book Her",
+      "name": "Book Her 123",
       "about": "The app takes you (the Casting Director) through a series of questions to determine the Models you need for your next Project.",
       "phase": 4,
       "link": "https://bookher.netlify.app/new_project",
@@ -87,6 +87,15 @@
       "phase": 4,
       "link": "https://gamesrx.netlify.app",
       "image": "https://i.imgur.com/Japzh6v.png"
+    },
+    {
+      "name": "Testing 123",
+      "about": "Testing 123",
+      "phase": "1",
+      "link": "Testing 123",
+      "image": "Testing 123",
+      "claps": 0,
+      "id": 26
     }
   ]
 }

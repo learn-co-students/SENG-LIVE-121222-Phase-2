@@ -30,6 +30,8 @@ const ProjectListItem = ({ project, enterProjectEditModeFor }) => {
 
   const handleClap = () => setClapCount(prevCount => prevCount + 1);
 
+  // Inverse Data Flow
+    // Updates "projectId" State in Root App
   const handleEditClick = () => {
     enterProjectEditModeFor(id);
   };

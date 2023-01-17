@@ -17,7 +17,9 @@ const ProjectForm = ({ onAddProject }) => {
   };
 
   const handleSubmit = (e) => {
+    
     e.preventDefault();
+    
     const configObj = {
       method: "POST",
       headers: {
@@ -30,7 +32,10 @@ const ProjectForm = ({ onAddProject }) => {
     fetch("http://localhost:4000/projects", configObj)
       .then((resp) => resp.json())
       .then((project) => {
+        
+        // Merges Newest "project" Into "projects" State
         onAddProject(project);
+        
         setFormData({
           name: "",
           about: "",
