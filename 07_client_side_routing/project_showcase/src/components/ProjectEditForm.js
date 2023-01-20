@@ -1,9 +1,22 @@
 // Deliverable 5: Using the useHistory hook, automatically redirect the user 
 // to the `ProjectShow` page upon submit
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { useParams, useHistory } from "react-router-dom";
 
 const ProjectEditForm = ({ onUpdateProject }) => {
+  
+  // console.log(useParams());
+  // console.log(useHistory());
+  
+  // useParams() => { id: 1 }
+  // useParams() => { id: 2 }
+  // ...
+
+  // Object Destructuring Assignment
+  const { id } = useParams();
+  const history = useHistory();
+  
   const [formData, setFormData] = useState({
     name: "",
     about: "",
@@ -15,7 +28,7 @@ const ProjectEditForm = ({ onUpdateProject }) => {
   const { name, about, phase, link, image } = formData;
 
   useEffect(() => {
-    fetch(`http://localhost:4000/projects/1`)
+    fetch(`http://localhost:4000/projects/${id}`)
       .then((res) => res.json())
       .then((project) => setFormData(project));
   }, []);
@@ -36,10 +49,13 @@ const ProjectEditForm = ({ onUpdateProject }) => {
       body: JSON.stringify(formData),
     };
 
-    fetch(`http://localhost:4000/projects/1`, configObj)
+    fetch(`http://localhost:4000/projects/${id}`, configObj)
       .then((resp) => resp.json())
       .then((updatedProj) => {
         onUpdateProject(updatedProj);
+
+        // Redirect User to "/projects/:id"
+        history.push(`/projects/${id}`);
       });
   };
 

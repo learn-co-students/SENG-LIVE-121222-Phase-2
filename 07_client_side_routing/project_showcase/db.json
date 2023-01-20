@@ -2,7 +2,7 @@
   "projects": [
     {
       "id": 1,
-      "name": "Great Outdoors Guide",
+      "name": "GREAT OUTDOORS GUIDE",
       "about": "Plan your next adventure to in the U.S. National Parks!",
       "phase": 4,
       "link": "https://great-outdoors-guide.netlify.app",
@@ -87,6 +87,33 @@
       "phase": 4,
       "link": "https://gamesrx.netlify.app",
       "image": "https://i.imgur.com/Japzh6v.png"
+    },
+    {
+      "name": "",
+      "about": "",
+      "phase": "",
+      "link": "",
+      "image": "",
+      "claps": 0,
+      "id": 26
+    },
+    {
+      "name": "Testing",
+      "about": "",
+      "phase": "",
+      "link": "",
+      "image": "",
+      "claps": 0,
+      "id": 27
+    },
+    {
+      "name": "Hello 123",
+      "about": "",
+      "phase": "",
+      "link": "",
+      "image": "",
+      "claps": 0,
+      "id": 28
     }
   ]
 }

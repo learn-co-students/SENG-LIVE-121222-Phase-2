@@ -65,7 +65,9 @@
   
     return (
       <div className={isDarkMode ? "App" : "App light"}>
+        
         <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
+        
         <Switch>
 
           {/* / => Root URL */}
@@ -86,7 +88,7 @@
           
           {/* /projects/:id => Show Page for Individual Projects */}
           <Route path="/projects/:id">
-            {/* <ProjectDetail /> */}
+            <ProjectDetail />
           </Route>
 
           {/* /projects => List of All Projects */}

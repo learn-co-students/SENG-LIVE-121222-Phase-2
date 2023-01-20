@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const ProjectForm = ({ onAddProject }) => {
+  
+  const history = useHistory();
+  
   const [formData, setFormData] = useState({
     name: "",
     about: "",
@@ -28,14 +32,22 @@ const ProjectForm = ({ onAddProject }) => {
     fetch("http://localhost:4000/projects", configObj)
       .then((resp) => resp.json())
       .then((project) => {
+        
         onAddProject(project);
-        setFormData({
-          name: "",
-          about: "",
-          phase: "",
-          link: "",
-          image: "",
-        });
+        
+        // setFormData({
+        //   name: "",
+        //   about: "",
+        //   phase: "",
+        //   link: "",
+        //   image: "",
+        // });
+
+        // Automatically Redirect User to "/projects" Upon Successful
+        // POST Request
+        
+        history.push('/projects');
+        // history.push(`/projects/${id}`);
       });
   };
 
