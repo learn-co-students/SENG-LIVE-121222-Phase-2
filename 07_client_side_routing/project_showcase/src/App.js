@@ -71,8 +71,12 @@
         <Switch>
 
           {/* / => Root URL */}
+          {/* exact => Limiting Component Rendering to a Single Path */}
           <Route exact path="/">
             <Home />
+            {/* <Some />
+            <Other />
+            <Components /> */}
           </Route>
 
           {/* :id => Symbol */}
@@ -92,7 +96,7 @@
           </Route>
 
           {/* /projects => List of All Projects */}
-          <Route path="/projects">
+          <Route exact path="/projects">
             <ProjectList
               projects={projects}
               onDeleteProject={onDeleteProject}
