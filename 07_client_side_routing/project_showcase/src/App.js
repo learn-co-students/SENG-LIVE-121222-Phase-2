@@ -1,19 +1,19 @@
 // Deliverable 2: Use Switch and Route to set up initial routes so we can 
 // conditionally render components based on URL
 
-  // - Import the `Switch` component from the `react-router-dom` library 
+  // DONE - Import the `Switch` component from the `react-router-dom` library 
   // and wrap the components designated for routing
 
-  // - Import the `Route` component from the `react-router-dom` library 
+  // DONE - Import the `Route` component from the `react-router-dom` library 
   // and wrap each individual component designated for routing
 
-  //   - Provide the `path` prop to the `Route` component to create a URL 
+  // DONE - Provide the `path` prop to the `Route` component to create a URL 
   // path associated with the component
 
-  // - Demonstrate each route in the browser to confirm desired expectation 
+  // DONE - Demonstrate each route in the browser to confirm desired expectation 
   // is occuring
 
-  // - Demonstrate the use of the `exact` prop passed to the `Route` 
+  // DONE - Demonstrate the use of the `exact` prop passed to the `Route` 
   // component
 
   import { useState, useEffect } from "react";
@@ -24,6 +24,8 @@
   import ProjectEditForm from "./components/ProjectEditForm";
   import ProjectDetail from "./components/ProjectDetail"
   import Home from "./components/Home";
+
+  import { Switch, Route } from 'react-router-dom';
   
   const App = () => {
     const [isDarkMode, setIsDarkMode] = useState(true);
@@ -64,14 +66,37 @@
     return (
       <div className={isDarkMode ? "App" : "App light"}>
         <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
-        <Home />
-        <ProjectList
-          projects={projects}
-          onDeleteProject={onDeleteProject}
-        />
-        <ProjectEditForm onUpdateProject={onUpdateProject} />
-        <ProjectForm onAddProject={onAddProject} />
-        {/* <ProjectDetail /> */}
+        <Switch>
+
+          {/* / => Root URL */}
+          <Route exact path="/">
+            <Home />
+          </Route>
+
+          {/* :id => Symbol */}
+          {/* /projects/:id/edit => Edit Form for Individual Projects */}
+          <Route path="/projects/:id/edit">
+            <ProjectEditForm onUpdateProject={onUpdateProject} />
+          </Route>
+          
+          {/* /projects/new => Create Form for Adding New Projects  */}
+          <Route path="/projects/new">
+            <ProjectForm onAddProject={onAddProject} />
+          </Route>
+          
+          {/* /projects/:id => Show Page for Individual Projects */}
+          <Route path="/projects/:id">
+            {/* <ProjectDetail /> */}
+          </Route>
+
+          {/* /projects => List of All Projects */}
+          <Route path="/projects">
+            <ProjectList
+              projects={projects}
+              onDeleteProject={onDeleteProject}
+            />
+          </Route>
+        </Switch>
       </div>
     );
   };
