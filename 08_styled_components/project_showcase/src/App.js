@@ -34,9 +34,9 @@
       --blue-dark: #145cb3;
       --purple: #cda2ff;
       --green: #00ef7c;
-      --color: var(--white);
-      --background: var(--black);
-      --primary: var(--turquoise);
+      --color: ${props => props.theme.color};
+      --background: ${props => props.theme.backgroundColor};
+      --primary: ${props => props.theme.primary};
     }
 
     * {
@@ -52,18 +52,6 @@
       background-color: var(--background);
     }
 
-    .App {
-      color: var(--color);
-      background-color: var(--background);
-      min-height: 100vh;
-    }
-
-    .App.light {
-      --color: var(--black);
-      --background: var(--white);
-      --primary: var(--dark-turquoise);
-    }
-
     section {
       padding: 2rem;
       display: flex;
@@ -71,6 +59,18 @@
       align-items: center;
     }
   `
+
+  const lightTheme = {
+    color: "var(--black)",
+    backgroundColor: "var(--white)",
+    primary: "var(--dark-turquoise)"
+  }
+
+  const darkTheme = {
+    color: "var(--white)",
+    backgroundColor: "var(--black)",
+    primary: "var(--turquoise)"
+  }
 
   const App = () => {
     const [isDarkMode, setIsDarkMode] = useState(true);
@@ -119,7 +119,7 @@
   
   
     return (
-      <div className={isDarkMode ? "App" : "App light"}>
+      <ThemeProvider theme={isDarkMode ? darkTheme : lightTheme}>
         <GlobalStyle />
         
         <Header isDarkMode={isDarkMode} onToggleDarkMode={onToggleDarkMode} />
@@ -165,7 +165,7 @@
             />
           </Route>
         </Switch>
-      </div>
+      </ThemeProvider>
     );
   };
   
