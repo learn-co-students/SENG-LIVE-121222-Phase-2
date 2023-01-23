@@ -55,7 +55,7 @@
   } */
 
 /* buttons */
-button, .button {
+/* button, .button {
   appearance: auto;
   padding: 0.5rem 0.75rem;
   border: none;
@@ -67,7 +67,7 @@ button, .button {
   background-color: var(--background);
   border: 2px solid var(--dark-turquoise);
   transition: background-color 0.2s;
-}
+} */
 
 button.active,
 button:focus,
@@ -146,7 +146,7 @@ header {
   margin-bottom: 1rem;
 }
 
-input,
+/* input,
 textarea,
 select {
   margin-top: 0.25rem;
@@ -164,7 +164,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border: 2px solid var(--primary);
-}
+} */
 
 .form button[type="submit"] {
   width: 50%;

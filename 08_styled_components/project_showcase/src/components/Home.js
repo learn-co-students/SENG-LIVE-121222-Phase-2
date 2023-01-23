@@ -4,6 +4,7 @@
 
   import { useEffect, useState } from "react";
   import { Link } from "react-router-dom";
+  import { Button } from "./shared";
   
   const Home = () => {
     const [recentProjects, setRecentProjects] = useState([]);
@@ -29,9 +30,9 @@
           <p key={project.id}>{project.name}</p>
         ))}
         <div style={{ margin: "1rem 0" }}>
-          <Link className="button" to="/projects">
+          <Button as={Link} to="/projects">
             View All Projects
-          </Link>
+          </Button>
         </div>
       </section>
     );

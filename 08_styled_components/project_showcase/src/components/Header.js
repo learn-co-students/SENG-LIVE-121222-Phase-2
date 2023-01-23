@@ -27,7 +27,7 @@
           <Button as={NavLink} to="/about">
             About
           </Button>
-          <button onClick={onToggleDarkMode}>{buttonTextContent}</button>
+          <Button onClick={onToggleDarkMode}>{buttonTextContent}</Button>
         </nav>
       </header>
     );

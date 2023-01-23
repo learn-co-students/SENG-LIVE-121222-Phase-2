@@ -2,6 +2,8 @@
 
   // How can we make `Button` render to the DOM as `Link` component?
 
+  import { Button } from "./shared";
+
   import { useState } from "react";
   import { FaPencilAlt, FaTrash } from "react-icons/fa";
   import { Link } from "react-router-dom";
@@ -56,9 +58,9 @@
       <li className="card">
         <figure className="image">
           <img src={image} alt={name} />
-          <button onClick={handleClap} className="claps">
+          <Button onClick={handleClap} className="claps">
             👏{clapCount}
-          </button>
+          </Button>
         </figure>
   
         <section className="details">
@@ -75,13 +77,13 @@
           <span className="badge blue">Phase {phase}</span>
           <div className="manage">
             <Link to={`projects/${id}/edit`} style={{ borderBottom: "none" }}>
-              <button onClick={handleEditClick}>
+              <Button onClick={handleEditClick}>
                 <FaPencilAlt />
-              </button>
+              </Button>
             </Link>
-            <button onClick={handleDeleteClick}>
+            <Button onClick={handleDeleteClick}>
               <FaTrash />
-            </button>
+            </Button>
           </div>
         </footer>
       </li>
